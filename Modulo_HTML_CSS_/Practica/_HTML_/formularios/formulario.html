@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Preferencias</title>
+
+</head>
+<style>
+
+
+body {
+
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    align-items: center;
+    margin:auto;
+}
+    
+form { 
+
+    padding-box 20px;
+    border-radius: 10px;
+}
+
+legend {
+
+    font-size: 20px;
+    font-weight:100px;
+    margin-bottom: 10px;
+}
+
+label {
+
+    display: block;
+    margin-top: 12px;
+    font-size: 15px;
+}
+
+imput, select, textarea {
+
+    width: 50%;
+    padding: 10px;
+    border: 1px solid black;
+}
+input[type="checkbox"] input[type="radio"] {
+    width: auto;
+}
+
+label {
+
+    display: block;
+    margin-top: 10px;
+    font-size: 10px;
+}
+input[type="submit"] {
+
+    background-color: darkmagenta;
+    color: white;
+    padding: 10px;
+    margin-top: 12px;
+    font-size: 12px;
+    width: 5%;
+}
+
+input[type="submit"] {
+    background-color: goldenrod;
+    
+}
+
+</style>
+
+</head>
+
+<body>
+    <form>
+        <fieldset>
+        
+            <legend>Encuesta de Preferencias</legend>
+
+            <label><h3><strong>Seleccione las actividades de inscripción preferente</strong></h3></label>
+
+            <div class="radio-group">
+                
+                
+
+                <label><input type="checkbox" name="Actividad" value="Escalada"> Escalada </label>
+                <label><input type="checkbox" name="Actividad" value="Submarinismo acuático"> Submarinismo acuático </label>
+                <label><input type="checkbox" name="Actividad" value="Ciclismo"> Ciclismo de montaña </label>
+                <label><input type="checkbox" name="Actividad" value="Parapente libre"> Parapente libre</label>
+
+            </div>
+
+            <label>Comentarios</label>
+            <textarea id="Comentarios" placeholder="Detalla aquí otras actividades..." rows="4"></textarea>
+            <br>
+            <input type="submit" value="Enviar">
+
+            <label>DNI:</label>
+            <input type="text" name="dni" id="dni">
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre">
+
+            <br>
+
+            <label for= "Apellidos">Apellidos</label>
+            <input id type="text" name="Apellidos" id="Apellidos">
+
+
+            <label><strong>Seleccione la fecha de inscripción</strong></label>
+            <input type="date" name="fecha">
+
+            <label><strong>Seleccione cuantos días semanales dedicaría a realizar alguna actividad</strong></label>
+            <select name="frecuencia semanal">
+                <option value="1">1 vez/semana</option>
+                <option value="2">Entre 2 y 3 días/semana</option>
+                <option value="3">3 veces/semana</option>
+                <option value="4">4 veces/semana</option>
+                <option value="5">5 veces/semana</option>
+            </select>
+            <div class="checkbox-group">
+
+                <label><input type="number" type="checkbox" name="Número días" value="Enteros"></label>
+                
+            </div>
+
+            <label><strong>Seleccione una franja horaria preferente:</strong></label>
+            <input type="time" name="hora" min="08:00" max="11:30">
+            
+            
+
+
+    </fieldset>
+</form>
+
+</body>
+</html>

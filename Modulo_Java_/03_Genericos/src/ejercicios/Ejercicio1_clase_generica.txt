@@ -1,0 +1,12 @@
+Ejercicio 1 – Clase Pareja Genérica
+Objetivo: Crear una clase genérica que almacene dos valores de cualquier tipo.
+
+Define la clase Pareja<T, U> con dos atributos privados primero (tipo T) y segundo (tipo U).
+
+Crea:
+
+Un constructor que reciba ambos valores.
+
+Métodos getPrimero() y getSegundo().
+
+Un método toString() que devuelva "(<primero>, <segundo>)".

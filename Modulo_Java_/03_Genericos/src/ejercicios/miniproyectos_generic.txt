@@ -1,0 +1,100 @@
+Estos enunciados son un miniproyecto. No hace falta que vayáis
+a ver TODOS los supuestos que puede haber en caada caso.
+Están pensados para revisar los objetos, con herencias, polimorfismo,
+abstracción, encapsulamiento, genéricos y documentación.
+
+Cada uno de estos ejercicios, para incrementar la eficiencia, debe ser un nuevo proyecto:
+
+Arriba a la izquierda hay un boton con una ventana y un + amarillo con un desplegable.
+Es el botón de "New..." y se puede añadir desde ahí un nuevo proyecto Java.
+Dadle al proyecto el nombre del ejercicio: Cartelera de un Teatro, Sistema de Museo,
+Gestión de pedidos de un bar.
+
+================
+   ENUNCIADOS
+================
+
+===Cartelera de un Teatro===
+* Modela las representaciones en un teatro:
+	* Espectaculo (clase base): título, duración y hora de inicio.
+	* Subclases:
+		* ObraTeatral: autor y número de actos.
+		* Musical: banda o grupo y si es en vivo.
+Crear una clase Cartelera que almacena un ArrayList<Espectaculo>.
+En el main, crear una cartelera, añadir espectáculos y mostrarlos ordenados por hora.
+
+* Documentación
+Comentar con JavaDoc cada clase y método relevante.
+Especial atención al método que ordena la cartelera.
+Documentar la clase Cartelera explicando su función como contenedor.
+
+* Main
+Crear una instancia de Cartelera.
+Añadir obras y musicales.
+Ordenar y mostrar por hora de inicio.
+
+
+===Sistema de Museo=== 
+Queremos modelar un sistema de gestión de un museo que pueda almacenar piezas de
+distintos tipos, y permitir operar sobre colecciones de cualquier subtipo de PiezaMuseo.
+
+* Clases:
+	1. PiezaMuseo (abstracta):
+		* Atributos: codigo, titulo, anioCreacion.
+		* Método abstracto getDescripcion().
+
+	2. Subclases:
+		* Escultura: añade material y altura.
+		* Pintura: añade tecnica y autor.
+
+	3. Clase genérica Almacen<T extends PiezaMuseo>:
+		* Atributo: List<T> elementos.
+
+* Métodos:
+	* void agregarPieza(T pieza)
+	* List<T> obtenerPiezas()
+	* void mostrarPiezas(): imprime getDescripcion() de cada pieza.
+	
+DOCUMENTACION:
+Documentar las clases explicando su propósito.
+En Almacen<T> documentar @param <T> en la clase.
+Documentar cada método, incluyendo @param y @return donde corresponda.
+Explicar en T extends PiezaMuseo que se restringe el tipo genérico a subtipos de PiezaMuseo.
+
+MAIN:
+Crear un Almacen<Escultura> y un Almacen<Pintura>.
+Añadir varios elementos.
+Llamar a mostrarPiezas() en cada uno.
+
+
+
+===Gestión de pedidos de un bar===
+Queremos modelar un sistema de pedidos de bar donde haya diferentes tipos de productos
+y una clase genérica que administre los pedidos de cualquier subtipo de Producto.
+
+1. Producto (superclase):
+	* Atributos: nombre, precio.
+	* Método getDescripcion().
+
+2. Subclases:
+	* Bebida: añade mililitros.
+	* Comida: añade tipo (tapa, ración, bocadillo).
+
+3. Clase genérica Pedido<T extends Producto>:
+	* Atributo: Map<T, Integer> (producto → cantidad).
+
+Métodos:
+	* void agregarProducto(T producto, int cantidad)
+	* double calcularTotal()
+	* void imprimirTicket()
+	
+DOCUMENTACION:
+JavaDoc para cada clase y método.
+En Pedido<T> usar @param <T> y explicar que está restringido a Producto.
+En imprimirTicket(), mostrar nombre, cantidad y subtotal.
+En calcularTotal(), mostrar el cálculo total del pedido.
+
+MAIN:
+Crear un Pedido<Producto> o Pedido<? extends Producto>.
+Añadir objetos de tipo Bebida y Comida.
+Imprimir el ticket con precios y total.

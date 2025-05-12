@@ -1,0 +1,20 @@
+Ejercicio 3 – Clase Genérica con Bounded Type
+Objetivo: Crear un almacén que solo acepte tipos numéricos (Number).
+
+1. Define public class AlmacenNumerico<T extends Number> { … }.
+
+2. Añade:
+	Atributo private T valor;
+	Métodos setValor(T v) y T getValor().
+	Método double valorDoble() que devuelva valor.doubleValue() * 2.
+
+3. Prueba en main():
+	AlmacenNumerico<Integer> a1 = new AlmacenNumerico<>();
+	a1.setValor(10);
+	System.out.println(a1.valorDoble());  // 20.0
+
+	AlmacenNumerico<Double> a2 = new AlmacenNumerico<>();
+	a2.setValor(2.5);
+	System.out.println(a2.valorDoble());  // 5.0
+
+	// AlmacenNumerico<String> a3; // debe dar error de compilación

@@ -1,0 +1,51 @@
+/* Estilos generales del cuerpo para centrar el contenido */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f7f7f7;
+}
+
+/* Estilo del botón */
+.fancy-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform:uppercase;
+    border-radius: 50px;
+    outline: none;
+    position:relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto de sombra para el botón */
+.fancy-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: #ffffff;
+    transition: all 0.5s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+/* Efectos al pasar el ratón por encima del botón */
+.fancy-button:hover {
+    transform: translateY(-10px) scale(1.1); /* El botón sube y se agranda */
+    background-color: #e74c3c; /* Cambia el color de fondo */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Agrega sombra */
+}
+
+/* El círculo de luz se expande con el hover */
+.fancy-button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}

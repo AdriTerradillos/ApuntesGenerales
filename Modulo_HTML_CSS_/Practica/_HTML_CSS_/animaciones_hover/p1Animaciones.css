@@ -1,0 +1,26 @@
+
+body {
+    font-family: sans-serif;
+ 
+}
+
+
+
+/* Estilos para el div */
+.cuadrado {
+    background-color: wheat;
+    height: 20vh;
+    margin: 30%;
+
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;  /* Centra verticalmente*/
+    
+    transition: background-color 1s, transform 0.5s 1s; /* Transición de color y transformaciones */
+}
+
+
+/* Efecto al pasar el ratón */
+.cuadrado:hover {
+    background-color: #e74c3c; /* Color al pasar el ratón */
+    transform: scale(1.2) rotate(45deg); /* Aumento de tamaño y rotación */
+}

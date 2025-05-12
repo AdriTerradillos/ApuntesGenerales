@@ -1,0 +1,14 @@
+Ejercicio 2 – Método Genérico maximo
+Objetivo: Implementar un método genérico que calcule el máximo de una lista.
+
+1. Crea un método estático dentro de una clase Utilidades:
+	public static <E extends Comparable<E>> E maximo(List<E> lista) { … }
+
+2. Recorre la lista y devuelve el elemento mayor según compareTo().
+
+3. En main():
+	List<Integer> nums = List.of(5, 12, 3, 8);
+	System.out.println(maximo(nums));  // 12
+
+	List<String> strs = List.of("zorro","abeja","mono");
+	System.out.println(maximo(strs));  // zorro

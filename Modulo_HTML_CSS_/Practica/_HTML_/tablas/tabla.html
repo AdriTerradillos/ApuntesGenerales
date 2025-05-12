@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tabla de Facturación</title>
+
+    <style>
+        table {
+            width: 70%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid green;
+            padding: 8px;
+            text-align: left;
+        }
+
+        td {
+            width: 100px;
+        }
+
+    
+
+    </style>
+
+</head>
+
+<body>
+
+    <table>
+
+        <tr>
+            <th colspan="3">Invoice #123456789</th>
+            <th>14 January 2025</th>
+        </tr>
+
+        <tr>
+            <td colspan="2"><strong>Pay to:</strong><br>Acme Billing CO<br>123 Main St.<br>Cityville, NA 12345
+            <td colspan="2"><strong>Customer:</strong><br>John Smith<br>321 Willow Way<br>Southeast Northwestershire, MA 54321</td>
+        </tr>
+
+        <tr>
+            <th><center>Name / Description</center></th>
+            <th><center>Qty.</center></th>
+            <th><center>@</center></th>
+            <th><center>Cost</center></th>
+
+        </tr>
+            <th>Peperclips</th>
+            <td>1000</td>
+            <td>0.01</td>
+            <td>10.00</td>
+            </tr>
+
+        <tr>
+            <th>Staples (box)</th>
+            <td>100</td>
+            <td>1.00</td>
+            <td>100.00</td>
+        </tr>
+
+        <tr>
+            <th colspan="3">Subtotal</th>
+            <td>110.00</td>
+        </tr>
+
+        <tr>
+            <th colspan="2">Tax</th>
+            <td>8%</td>
+            <td>8.80</td>
+        </tr>
+
+        <tr>
+            <th colspan="3">Grand Total</th>
+            <th>$ 118.80</th>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>

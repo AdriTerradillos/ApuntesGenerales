@@ -1,0 +1,10 @@
+Ejercicio 5 – Raw Types y Seguridad de Tipos
+Objetivo: Experimentar con un tipo crudo y observar los errores en runtime.
+
+1. Usa la clase genérica para guardar algo dentro (como almacen).
+
+2. Declara (sin parámetros) para que no tenga en cuenta el tipo de clase.
+
+3. Guarda en él distintos objetos (mínimo algo numérico, texto...)
+
+4. Haz get de lo que hay guardado haciendo casteo.

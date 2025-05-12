@@ -1,0 +1,72 @@
+.section {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 100vw;
+        min-height: 100vh;
+    }
+    
+    .grid-calendar {
+        border: 2px solid grey;
+        display: grid;
+        grid-template-columns: repeat(4, 300px);
+        column-gap: 20px;
+        row-gap: 5px;
+    }
+    
+    div {
+        padding: 20px 0;
+        background-color: #E91E62;
+        color: white;
+        border: 1px solid white;
+        text-align: center;
+    }
+
+
+    #Enero {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      
+    }
+
+    #Febrero {
+        grid-column-start: 3;
+        grid-column-end: 5;
+        
+    }
+
+    #Mayo {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 2;
+        grid-row-end:4;
+
+    }
+
+    #Junio{
+        grid-column-start: 4;
+        grid-column-end: 5;
+        grid-row-start: 2;
+        grid-row-end:4;
+
+    }
+
+    #Octubre {
+        grid-column-start: 2;
+        grid-column-end: 4;
+       
+    }
+
+   #Diciembre {
+    grid-column-start: 1;
+    grid-column-end: 5;
+
+
+   }
+  

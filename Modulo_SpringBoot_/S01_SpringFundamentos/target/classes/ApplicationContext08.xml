@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<!-- asigno los atributos de la clase Direccion de manera desgranada -->
+	<bean id ="direcc" class= "es.class.spring.casa.Direccion";
+	<bean id= "d1" class= "es.curso.spring08.Direccion">  <!-- vinculo la clase extendida Dirección (de clase CASA) con este archivo -->
+	<property name="calle" value="Reyes Católicos"></property>
+	<property name="numero" value="12"></property>
+	<property name ="cp" value="18001"></property>
+	<property name="numeroPuerta" value="12"></property>
+	</bean>
+	
+	<bean id="d2" class= "es.curso.spring08.Direccion">
+	<property name="tipoVia" value="Calle"></property>
+	<property name="nombreVia" value="Sierpes"></property>
+	<property name ="cp" value="41004"></property>
+	<property name="numeroPuerta" value="25"></property>
+	</bean>
+	
+	<bean id="d3" class= "es.curso.spring08.Direccion">
+	<property name="tipoVia" value="Calle"></property>
+	<property name="nombreVia" value="Fuencarral"></property>
+	<property name ="cp" value="28004"></property>
+	<property name="numeroPuerta" value="8"></property>
+	</bean>
+	
+	<bean id="d4" class= "es.curso.spring08.Direccion">
+	<property name="tipoVia" value="Paseo"></property>
+	<property name="nombreVia" value="de la Alameda"></property>
+	<property name ="cp" value="46010"></property>
+	<property name="numeroPuerta" value="3"></property>
+	</bean>
+	
+	<bean id="d5" class= "es.curso.spring08.Direccion">
+	<property name="tipoVia" value="Paseo"></property>
+	<property name="nombreVia" value="del Arenal"></property>
+	<property name ="cp" value="03730"></property>
+	<property name="numeroPuerta" value="27"></property>
+	</bean>
+	
+	<bean id="d6" class= "es.curso.spring08.Direccion">
+	<property name="tipoVia" value="Avenida"></property>
+	<property name="nombreVia" value="La Rambla"></property>
+	<property name ="cp" value="08002"></property>
+	<property name="numeroPuerta" value="42"></property>
+	</bean>
+	
+	
+	
+	<!-- 2º. Asigno los atributos de la clase tipoHabitaculo de manera desgranada -->
+	<bean id= "h1" class= "es.curso.spring08.tipoHabitaculo">  <!-- vinculo la clase extendida Dirección (de clase CASA) con este archivo -->
+	<property name="cocina" value="10"></property>
+	<property name="nombreVia" value="Reyes Catolicos"></property>
+	<property name ="cp" value="18001"></property>
+	<property name="numeroPuerta" value="12"></property>
+	</bean>

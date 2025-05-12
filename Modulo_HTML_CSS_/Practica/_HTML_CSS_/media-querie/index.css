@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    bottom: 0%;
+}
+
+
+
+
+body {
+    display: flex;
+    justify-content: none;
+    align-items: none;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+
+
+/* Contenedor de las cajas */
+
+.article div {
+    border: 2px solid black
+ 
+  
+}
+
+
+
+/* Colores de las cajas */
+
+#box1 {
+    background: blue;
+    padding: 0px;
+    width: 600px;
+    height: 70px;
+    line-height: 150px;
+
+}
+
+
+#box2 {
+    background: rgb(22, 22, 129);
+    padding: 0px;
+    width: 600px;
+    height: 70px;
+    line-height: 150px;
+
+  
+}
+
+#box3 {
+    background: aqua;
+    padding: 0px;
+    width: 600px;
+    height: 70px;
+    line-height: 150px;
+
+   
+}
+
+
+
+/* Para eliminar los números dentro de las cajas */
+
+article #box1 {
+    text-indent: -9999px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+article #box2 {
+    text-indent: -9999px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+article #box3 {
+    text-indent: -9999px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+
+
+/* Ocultar los títulos */
+
+#prueba1 {
+    display: none;
+    background:blue
+}
+
+#prueba2 {
+    display: none;
+}
+
+#prueba3 {
+    display: none;
+}
+
+
+p.box {
+    background-color: white;
+}
+
+
+
+

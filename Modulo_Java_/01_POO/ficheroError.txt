@@ -1,0 +1,4 @@
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1660)
+	at _04_excepciones._04_ejemplos.Main06.pedirValor(Main06.java:57)
+	at _04_excepciones._04_ejemplos.Main06.main(Main06.java:16)

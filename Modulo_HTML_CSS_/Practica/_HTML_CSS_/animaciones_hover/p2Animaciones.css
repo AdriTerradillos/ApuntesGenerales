@@ -1,0 +1,27 @@
+/* Estilo básico para el contenedor */
+.container {
+    width: 300px;
+    height: 200px;
+    background-color: #389fe3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+
+/* Estilo inicial del h1 */
+.container h1 {
+    color: white;
+    font-size: 2em;
+    position: relative;
+    transition: color 1s ease 1s, transform 1s ease; /* Animación del color y el desplazamiento */
+}
+
+/* Efectos cuando pasamos el ratón sobre el contenedor */
+.container:hover h1 {
+    transform: translateX(100px); /* Desplazamiento hacia la derecha */
+    color: #e74c3c; /* Nuevo color del texto */
+}

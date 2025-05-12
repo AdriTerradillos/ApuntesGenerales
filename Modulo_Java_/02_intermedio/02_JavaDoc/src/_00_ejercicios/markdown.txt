@@ -1,0 +1,74 @@
+Genera un archivo Markdown (.md) y ve añadiendo características:
+
+1. Encabezados:
+	- Son diferentes niveles (#, ##, ###...)
+
+2. Listas:
+	- Con * --> puedes hacer diferentes niveles jerárquicos.
+	- También puedes hacerlo con -
+	- También puedes hacerlo ordinal (1. lo activa) --> contempla jerarquía.
+		* Para hacer diferentes niveles jerárquicos pulsa tab
+		
+	Se hacen to-do lists con:
+	[ ] Tarea sin realizar
+	[x] Tarea realizada
+		
+3. Bloques de código: abren y cierran con ```
+
+4. Tablas:
+	| --> separador de columnas
+	-  -> separador de encabezados-filas
+	Se puede alinear el texto de toda una columna a un margen, centrado...
+	Se indica en la línea de separador:
+	:---- alineación a la izquierda (posición de :)
+	:--: alineación centrada
+	
+5. Enlaces:
+	[] -> palabra que saldrá en el texto
+	() -> lugar para añadir el enlace
+	[cosa](https://enlace.com/cosa)
+	
+6. Código dentro de texto -> `estoEsCodigo`
+
+7. Blockquote es un bloque que hace una citación -->     > esto es un blockquote
+	
+	
+Prepara README.md para un proyecto ficticio “MiApp” que incluya:
+
+Encabezados para:
+	Nombre del proyecto (H1).
+	Descripción (H2).
+	Instalación (H2).
+	Uso (H2).
+
+Listas de requisitos y pasos de instalación.
+
+	Estructura:
+		Requisitos
+			Versión de Java
+			Git
+			
+		Pasos instalación
+			1. Clonar repo --> hay que abrir luego un bloque de código bash
+				```bash
+				código para clonar repo
+				```
+			2. Entrar en la carpeta --> lo mismo que en 1 a continuación
+			3. Configuración de variables de entorno si son necesarias
+			4. Construir app con maven --> ya llegaremos
+			5. Iniciar con Spring-boot --> ya llegaremos
+			6. abrir en el navegador el enlace
+			
+Fragmento de código para la instalación --> invéntatelo, pero como si fuera para terminal
+
+Tabla de versiones y fecha: mínimo 3 filas y 2 columnas.
+
+Enlace al repositorio y imagen del logo.
+
+Lista de tareas pendientes en formato Markdown.
+	Si está pendiente porque se está desarrollando cualquier parte se indica.
+	Haz una lista del proceso (ejemplo: hacer repositorio, diseñar estructura, definir funciones, escribir tests...)
+	Marca las tareas que ficticiamente han sido cumplidas
+
+Un blockquote con la misión del proyecto.
+	

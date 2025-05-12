@@ -1,0 +1,104 @@
+/* Estilos generales del cuerpo para centrar la tarjeta */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+    margin: 0;
+}
+
+/* Estilos de la card */
+.card {
+    width: 300px;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transform: scale(1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+}
+
+/* Imagen de fondo de la card */
+.card-image {
+    width: 100%;
+    height: 50%;
+    background-image: url('https://via.placeholder.com/300x200'); /* Reemplazar con la imagen deseada */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Contenido dentro de la card */
+.card-content {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Título del producto */
+.product-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+}
+
+/* Descripción o precio del producto */
+.product-info {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+/* Estilos del botón */
+.buy-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #3498db;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efectos al hacer hover sobre la card */
+.card:hover {
+    transform: scale(1.05); /* Aumenta el tamaño */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Sombra más oscura */
+    border: 2px solid #3498db; /* Borde azul al hacer hover */
+}
+
+/* Efectos sobre el título y el subtítulo al hacer hover */
+.card:hover .product-title {
+    color: #3498db; /* Cambia el color del título */
+}
+
+.card:hover .product-info {
+    color: #555; /* Cambia el color del subtítulo */
+}
+
+
+/* Efectos al hacer hover sobre el botón */
+.buy-button:hover {
+    background-color: #2980b9; /* Cambia el color del botón */
+    transform: translateY(-3px); /* Empuja el botón hacia arriba */
+}
+
+
+/* Imagen de fondo de la card */
+.card-image {
+    width: 100%;
+    height: 50%;
+    background-image: url(zapatos-cuerpo.jfif); /* URL de la imagen */
+    background-size: cover;
+    background-position: center;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra todo el área sin deformarse */
+}

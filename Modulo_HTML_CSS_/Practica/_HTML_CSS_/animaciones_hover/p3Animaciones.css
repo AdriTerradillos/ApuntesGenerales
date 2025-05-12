@@ -1,0 +1,53 @@
+/* Estilo básico para el contenedor */
+.container {
+    width: 300px;
+    height: 200px;
+    background-color: #3498db;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    margin-bottom: 20px;
+}
+
+/* Estilo inicial del h1 */
+.container h1 {
+    color: white;
+    font-size: 2em;
+    position: relative;
+    transition: color 1s ease 1s, transform 1s ease; /* Animación del color y el desplazamiento */
+}
+
+/* Efectos cuando pasamos el ratón sobre el primer contenedor */
+.container:hover h1 {
+    transform: translateX(100px); /* Desplazamiento hacia la derecha */
+    color: #e74c3c; /* Nuevo color del texto */
+}
+
+/* Estilo básico para el segundo contenedor */
+.second-container {
+    width: 300px;
+    height: 200px;
+    background-color: #2ecc71;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: all 3s ease; /* Transición de 3s */
+}
+
+/* Estilo inicial del h2 */
+.second-container h2 {
+    color: white;
+    font-size: 2em;
+}
+
+/* Efectos cuando pasamos el ratón sobre el primer contenedor */
+.container:hover + .second-container {
+    transform: rotate(360deg) translateX(500px); /* Gira y se desplaza */
+}

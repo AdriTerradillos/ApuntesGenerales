@@ -1,0 +1,110 @@
+git Hub Desktop (instrucciones)
+
+Local Changes
+
+- Aquí veremos nuestro repositorio, una vez hallamos terminado la sincronización del mismo a través de "Open Git Bash Here" (Terminal colorida con sus respectivos comandos de git) 
+
+
+Git Hub me permite merkear (o fusionar) a mi rama.
+Mantener cambios en la nube (git hub) allí tienes acceso a esos cambios desde cualquier dispositivo. App accesible desde cualquier dispositivo.
+
+1. Terminal (Desde aquí creamos la carpeta, clonamos repositorio a la carpeta, listamos la carpeta y sincronizamos de local a remoto.
+
+2. Git Hub
+
+(Puedo aplicar comandos de Linux (ls, mkdir, cd...) dentro de la terminal Open Git Bash Here
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------
+
+EN HTML (11/03/2025)
+
+Iniciaremos, en la mayoría de los casos, con el nombre de "index.html" desde Visual Studio (Por ejemplo)
+
+- "index.html" es universal en cualquier app que utilicemos para creación de páginas web.
+
+- Para crear el cuerpo de nuestro HTML, incorporar únicamente la expresión "! + ENTER" Se creará todo el cuerpo básico para empezar.
+
+
+- ESQUELETO SERÁ HTML
+- LOS MÚSCULOS DE ESTE CUERPO SERÁN CSS, VISUAL STUDIO CODE, ETC.. (PARTE DE DISEÑO DE NUESTRA PÁGINA WEB)
+
+	Aquí veremos lo siguiente
+	COLORES
+	TIPOS DE LETRA, TAMAÑO
+	SOMBREADO 
+	CUADROS DE TEXTO
+
+
+
+Se puede hacer y crear también desde un blog de notas (Mismas etiquetas y composición que aplicaría en Visual Studio de HTML por ejemplo)
+
+
+Nosotros escribimos código para que alguien más lo vea, no para nosotros mismos (código = Pág web)
+
+
+- La letra <p>Texto</p> de etiqueta "Párrafo" es un container, sirve para varias etiquetas, al igual que <div>Texto</div>
+
+
+"branchear", el coordinador tiene en otras ramas, que no podemos ver. Nos encontramos en otras.
+
+
+Una etiqueta atributo puede ser...
+class
+src
+
+<img    (integra)
+
+(signific source)  src= (pegamos el link de la imagen)
+alt= (colocamos el nombre que queremos colocar debajo de nuestra imagen)
+style= wight"xz" hight "xy";
+
+frameworl
+
+
+<a> (etiqueta que sirve para copiar un enlace local o externo)
+href (significa "hipervínculo de referencia)
+
+<a href= enlace de referencia /a>
+
+hoover (pasar el cursor sobre un texto, sin más)
+
+
+
+Etiqueta <table></table>
+
+Las tablas no tienen 
+
+desde visual sTUDIO CODE, Puedo dar click derecho y clicar hasta Live
+
+
+Boostwrap nos facilita el uso dentro de CSS)
+
+
+
+
+
+¿Qué son los atributos? (sub etiquetas que están dentro de etiquetas)
+src
+alt
+a href
+-------------
+<img>
+src
+alt
+style
+---------------
+<video with"" height"" control;
+------------------------
+tablas (tipo numérico)

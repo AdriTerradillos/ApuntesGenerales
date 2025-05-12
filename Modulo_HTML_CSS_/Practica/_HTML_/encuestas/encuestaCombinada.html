@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta</title>
+</head>
+<body>
+    <form action="#" method="post">
+        <h2>Encuestas de Selección Simple</h2>
+        <p>¿Prefiere usar ropa clara u oscura?</p>
+        <input type="radio" id="ropa_clara" name="ropa_clara" value="clara">
+        <label for="casa_si">clara</label>
+        <input type="radio" id="ropa_oscura" name="ropa_oscura" value="oscura">
+        <label for="casa_no">oscura</label>
+        <br><br>
+        
+        <p>¿Consume habitualmente café en la mañana?</p>
+        <input type="radio" id="cafe_si" name="gusta_cafe" value="si">
+        <label for="cafe_si">Sí</label>
+        <input type="radio" id="cafe_no" name="gusta_cafe" value="no">
+        <label for="cafe_no">No</label>
+        <br><br>
+        
+        <h2>Encuestas de Selección Múltiple</h2>
+        <p>¿Qué tipos de música escucha? (Seleccione todas las opciones que apliquen)</p>
+        <input type="checkbox" id="rock" name="musica" value="rock">
+        <label for="rock">Rock</label>
+        <input type="checkbox" id="pop" name="musica" value="pop">
+        <label for="pop">Pop</label>
+        <input type="checkbox" id="jazz" name="musica" value="jazz">
+        <label for="jazz">Jazz</label>
+        <input type="checkbox" id="clasica" name="musica" value="clasica">
+        <label for="clasica">Clásica</label>
+        <br><br>
+        
+        <p>¿Qué deportes practica? (Seleccione todas las opciones que apliquen)</p>
+        <input type="checkbox" id="futbol" name="deportes" value="futbol">
+        <label for="futbol">Fútbol</label>
+        <input type="checkbox" id="baloncesto" name="deportes" value="baloncesto">
+        <label for="baloncesto">Baloncesto</label>
+        <input type="checkbox" id="natacion" name="deportes" value="natacion">
+        <label for="natacion">Natación</label>
+        <input type="checkbox" id="ciclismo" name="deportes" value="ciclismo">
+        <label for="ciclismo">Ciclismo</label>
+        <br><br>
+        
+        <h2>Comentario</h2>
+        <label for="comentario">Escriba su opinión:</label>
+        <textarea id="comentario" name="comentario" rows="4" cols="30" required></textarea>
+        <br><br>
+        
+        <h2>Encuesta de Satisfacción</h2>
+        <p>Califique su experiencia del 1 al 5:</p>
+        <input type="radio" id="satisfaccion_1" name="satisfaccion" value="1">
+        <label for="satisfaccion_1">1</label>
+        <input type="radio" id="satisfaccion_2" name="satisfaccion" value="2">
+        <label for="satisfaccion_2">2</label>
+        <input type="radio" id="satisfaccion_3" name="satisfaccion" value="3">
+        <label for="satisfaccion_3">3</label>
+        <input type="radio" id="satisfaccion_4" name="satisfaccion" value="4">
+        <label for="satisfaccion_4">4</label>
+        <input type="radio" id="satisfaccion_5" name="satisfaccion" value="5">
+        <label for="satisfaccion_5">5</label>
+        <br><br>
+        
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

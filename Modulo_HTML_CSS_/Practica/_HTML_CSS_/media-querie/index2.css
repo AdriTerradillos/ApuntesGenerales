@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+
+body {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+    min-width: 100vw;
+    min-height: 100vw;
+    font-size: 24px;
+
+}
+
+
+/*  Contenedor principal de las cajas */
+
+.article div {
+    border:2px solid black;
+    
+  
+}
+
+
+
+/* Colores y atributos de espaciado, altura, anchura y grosor de cada una de las cajas */
+
+#box1 {
+    background-color: pink;
+    padding: 0px;
+    width: 1000px;
+    height: 50px;
+    line-height: 150px;
+}
+
+
+#box2 {
+    background-color: red ;
+    padding: 0px;
+    width: 1000px;
+    height: 50px;
+    line-height: 150px;
+}
+
+
+#box3 {
+    background-color: rgb(112, 43, 43) ;
+    padding: 0px;
+    width: 1000px;
+    height: 50px;
+    line-height: 150px;
+}
+
+
+/* Para eliminar los números dentro de las cajas */
+
+article #box1 {
+    text-indent: -9999px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+article #box2 {
+    text-indent: -9999px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+article #box3 {
+    text-indent: -9999px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+
+/* Ocultar los títulos de Prueba */
+
+#prueba1 {
+    display:none;
+
+}
+
+#prueba2 {
+    display: none;
+}
+
+#prueba3 {
+    display:  none;
+
+}
+

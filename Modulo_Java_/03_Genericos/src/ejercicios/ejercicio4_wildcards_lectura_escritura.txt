@@ -1,0 +1,8 @@
+Ejercicio 4 – Wildcards en Lectura y Escritura
+Objetivo: Construir dos métodos, uno para leer y otro para escribir con wildcards.
+
+1. Método para sumar cualquier lista de números, sumar.
+
+2. Método para añadir números a una lista, llenarInteger.
+
+3. Haz que funcione en main()

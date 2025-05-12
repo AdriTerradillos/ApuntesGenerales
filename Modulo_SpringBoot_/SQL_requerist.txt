@@ -1,0 +1,400 @@
+Paquete de SQL sentencias (git hub) luego lo sube de todas formas:
+
+[Podemos echar mano en el navegador de types SQL manual, para investigar más a fondo]
+[en SQL para hacer un comentario, utilizaremos "--"]
+
+
+--> Estructura <--
+¿Cómo crearía tabla usuario (o User)?
+- Necesitamos una Primary Key [type]
+- Agregamos los atributos (user_name | user_email)
+
+1º --> Crearemos la base de datos. (supunemos que ya está creada)
+CREATE TABLE IF NOT EXISTS (Si ecxistiera esa tabla, no me dejará crearla con esos datos)
+
+
+CREATE TABLE IF NOT EXISTS usuario (
+    // 1º --> asignamos o damos el id (asignar un tipo):
+        id [type] --> [INT] PRIMARY KEY  AUTO_INCREMENT,
+
+    // 2º --> generaremos atributo: un nombre de usuario.
+    // 2º --> generaremos otro atributo: un email de usuario
+    // * Asignaremos a mi atributo user_name un tipo de dato [type] --> VARCHAR(20) --> Que sea una secuencia de letras con un máximo de 20 caracteres o letras
+    // * Asignaremos a mi atributo user_name una restricción --> UNIQUE --> Con esto, decimos que la restricción sea única
+    // * Asignaremos a mi atributo user_email un tipo de dato [type] --> VARCHAR(250) --> Que sea una secuencia de letras con un máximo de 250 caracteres o letras
+    // * Asignaremos a mi atributo user_email una restricción --> UNIQUE --> Con esto, decimos que la restricción sea única
+        user_name [type] --> [VARCHAR(20)] [restriccion] --> [UNIQUE],
+        user_email [type] --> [VARCHAR(250)] [restriccion] --> [UNIQUE]
+        ;)
+
+
+        -- estructura de un comentario
+        -- una tabla "persona"
+        -- atibutos: nombre, apellido1, apellido2, dni
+
+user_nombre [type] --> [VARCHAR(20)] [restriccion] --> VARCHAR(20)
+user_apellido [type] --> 
+
+[CONSTRAINT --> Es un tipo de restricción, despues asignamos al atributo que queremos aplicar esa restricción, ver REGEXP de manera práctica aplicándolo a atributo dni (check_dni)]
+[CONSTRAINT --> Una segunda restriccón, ahora se la aplicamos a atributo nombre1, ver CHAR_LENGTH "Quiero que la longitud de letras del atributo nombre1 sea mayor o igual a dos caracteres)]
+
+CREATE TABLE IF NOT EXISTS persona (
+id INT PRIMARY KEY AUTO_INCREMENT, 
+nombre1 VARCHAR(50) NOT NULL ,
+nombre2 VARCHAR(50) NULL ,
+apellido1 VARCHAR(50) NOT NULL ,
+apellido2 VARCHAR(50) NULL ,
+dni VARCHAR(50) NOT NULL UNIQUE,
+CONSTRAINT check_dni CHECK (dni REGEXP '^[0-9] {8} [A-Z]$'), 
+CONSTRAINT check_nombre1_length CHECK (CHAR_LENGTH(nombre1)) >= 2)
+);
+ 
+
+ ----------------------------------
+ Nuevo ejercicio:
+(Datos ejercicio)
+-- tabla: alumnos
+-- atributos: id, nombre, apellido, fecha_nacimiento, email
+
+// genero la tabla principal: Alumno
+CREATE TABLE IF NOT EXISTS alumno (
+    id int PRIMARY KEY  AUTO_INCREMENT ,   (El AUTO_INCREMENT me dice que puedo incorporar varíos atributos en "INCREMENTO" a esta lista)
+    nombre1 VARCHAR(20) NOT NULL ,    (NOT NULL --> el campo del atributo nombre1 no puede quedar vacío [NOT NULL] campo que no esté vacío, ese campo y que contenga un total de 20 caracteres)
+    apellido1 VARCHAR(50) NOT NULL ,  (NOT NULL --> el campo del atributo apellido1 no puede quedar vacío [NOT NULL] y que contenga un total de 50 caracteres)
+    fecha_nacimiento date NOT NULL ,
+    email VARCHAR(250) NOT NULL,  UNIQUE
+);
+    (Con UNIQUE, nos dice que no puedo registrar un nuevo usuario con email igual al de otro usaurio que ya haya accedido con ese email o correo)
+    CONSTRAINT pk_alumnos
+
+    // Ahora, agrego los elementos dentro de mi tabla Alumno:
+
+    CREATE TABLE IF NOT EXISTS alumno (
+    id int PRIMARY KEY  AUTO_INCREMENT ,  
+    nombre1 VARCHAR(20) NOT NULL ,   
+    apellido1 VARCHAR(50) NOT NULL , 
+    fecha_nacimiento date NOT NULL ,
+    email VARCHAR(250) NOT NULL,  
+);
+
+CREATE TABLE IF NOT EXISTS alumno2 (
+    id int PRIMARY KEY  AUTO_INCREMENT ,  
+    nombre1 VARCHAR(20) NOT NULL ,   
+    apellido1 VARCHAR(50) NOT NULL , 
+    fecha_nacimiento date NOT NULL ,
+    email VARCHAR(250) NOT NULL,  
+);
+
+
+------------------------------------------------
+
+Nuevo ejercicio:
+
+-- tabla: producto 
+-- atributos: id, cod_barras, precio, fecha_envio, fecha_caducidad, marca, proveedor, tipo 
+
+CREATE TABLE IF NOT EXISTS producto (
+    id int PRIMARY KEY  AUTO_INCREMENT ,   (El AUTO_INCREMENT me incorprora automáticamente los elementos que le voy asignando en orden)
+    cod_barras CHAR(13) NOT NULL ,    (NOT NULL --> el campo del atributo nombre1 no puede quedar vacío [NOT NULL] campo que no esté vacío, ese campo y que contenga un total de 20 caracteres)
+   [estas son las columnas] 
+   precio DECIMAL(8, 2) NOT NULL ,  (DECIMAL lo utilzamos para números decimales en SQL) ( 8 DIGITOS EN TOTA, LOS CUALES 2 DE ELLOS SON DECIMALES)
+    fecha_envio DATETIME NOT NULL ,
+    fecha_caducidad date NOT NULL , 
+    marca VARCHAR(50) NOT NULL ,     (VARCHAR y ENUM, son válidos en marca) (ENUM --> enumeración, lo utilizamos para "enumerar" datos fijos, no apliables)
+    proveedor ENUM('proveedor1', 'proveedos2',   ) NOT NULL ,                     (ENUM --> enumeración de las posibles opciones que puedo elegir dentro del mismo) --> 'proveedor1', 'proveedor2'   
+    tipo ENUM('Carnicería', 'Perfumería',   ) NOT NULL
+);
+
+
+   -- CHAR, puedo utilizarlo para dni o cod_barras
+
+
+
+
+-----------------------------------------------
+
+
+
+Nuevo Ejercicio: ahora vamos a asociar 2 tablas (foreign key)
+
+-- tabla: clientes
+-- atributos: cliente_id, nombre, email
+
+CREATE TABLE IF NOT EXISTS clientes (
+cliente_id INT PRIMARY_KEY AUTO_INCREMENT ,  -- de manera automática y ordenada, van añadiendose los id_clientes que vayamos agregando en la tabla
+nombre VARCHAR(50) NOT NULL ,
+email VARCHAR(250) UNIQUE NOT NULL    (UNIQUE --> No acepta que se repita el mismo usuario email con mismo correo de usuario)
+);
+
+
+
+-- tabla: pedidos
+-- atributos: pedidos_id, fecha, cliente_id, total
+
+CREATE TABLE IF NOT EXISTS pedidos (
+    pedidos_id INT PRIMARY_KEY AUTO_INCREMENT  ,      -- de manera automática y ordenada, van añadiendose los id_clientes que vayamos agregando en la tabla
+    fecha DATE, NOT NULL ,
+    clientes_id INT ,
+    precio DECIMAL (8, 2) NOT NULL ,
+    FOREIGN KEY (clientes_id) PREFERENCES clientes(clientes_id)
+);
+
+
+--------------------------------------------------
+
+
+--> Se puede utilizar ALTER TABLE (Podemos cambiar con el el nombre de una tabla)
+
+-- Creo la tabla clientes
+CREATE TABLE IF NOT EXISTS clientes (
+    clientes_id INT PRIMARY KEY AUTO_INCREMENT ,
+    nombre VARCHAR(50) NOT NULL ,
+    email VARCHAR(250) UNIQUE NOT NULL    (UNIQUE --> No acepta que se repita el mismo usuario email con mismo correo de usuario)
+);
+
+
+-- Creo la tabla pedidos
+CREATE TABLE IF NOT EXISTS pedidos (
+    pedidos_id INT PRIMARY_KEY AUTO_INCREMENT  ,      -- de manera automática y ordenada, van añadiendose los id_clientes que vayamos agregando en la tabla
+    fecha DATE, NOT NULL ,
+    clientes_id INT ,
+    precio DECIMAL (8, 2) NOT NULL ,
+);
+
+
+-- Altero la tabla pedidos (ALTER TABLE pedidos)
+ALTER TABLE pedidos
+ADD CONSTRAINT fk_clientes
+FOREIGN KEY (cliente_id)
+REFERENCES clientes(cliente_id);
+
+
+-- Al momento de hacer ALTER TABLE sobre tabla pedidos (ver ALTER TABLE pedidos, aquí arriba) , omitimos los corchetes "()" y las comas al final de cada línea ","
+-- Únicamente, cierro la sentencia al final con ";"
+-- ALTER TABLE, "altera" o "modifica" los datos de mi tabla original
+
+
+--------------------------------------------
+
+Nuevo Ejercicio:
+
+-- tabla: entradas
+-- atributos: matricula, fecha, hora_entrada, hora_salida
+
+CREATE TABLE IF NOT EXISTS entrada (
+    matricula VARCHAR(10) NOT NULL ,
+    fecha DATE NOT NULL , 
+    hora_entrada TIME NOT NULL , 
+    hora_salida TIME NOT NULL
+    PRIMARY_KEY (matricula, fecha, hora_entrada)
+
+);
+
+
+CREATE TABLE IF NOT EXISTS entrada (
+    matricula VARCHAR(10) NOT NULL ,
+    fecha DATE NOT NULL , 
+    hora_entrada TIME NOT NULL , 
+    hora_salida TIME NOT NULL
+    CONSTRAINT pk_matricula_fecha_entrada PRIMARY KEY(matricula, fecha, hora_entrada)
+);
+
+-------------------------------
+
+Nuevo Ejercicio: Relación entredos tablas:
+
+-- FOREIGN COMPUESTA
+
+-- tabla: venta
+-- atributos: id_venta, id_producto
+
+--tabla: detalle_venta
+-- atibutos: id_venta, id_producto, cantidad
+
+
+-- creo la tabla de "venta"
+CREATE TABLE venta (
+    id_ventas INT ,
+    id_producto INT ,
+    PRIMARY KEY (id_venta, id_productos)
+);
+
+
+-- creo la tabla de "detalle_ventas"
+CREATE TABLE detalle_ventas (
+    id_venta INT ,
+    id_producto INT ,
+    cantidad INT ,
+    CONSTRAINT fk_venta_producto
+        FOREIGN KEY (id_venta, id_producto)
+        REFERENCES venta (id_venta, id_producto)
+);
+
+
+--------------------------------------
+
+Nuevo Ejercicio:
+
+-- tabla: medicamento
+-- atributos: id_medicamentos, lote, cantidad
+
+-- tabla:  consumo_medicamento
+-- atributos:  id_medicamento, lote, cantidad
+
+CREATE TABLE medicamento (
+    id_medicamento INT ,
+    lote VARCHAR(50),  
+    PRIMARY KEY(id_venta, id_productos)
+);
+
+CREATE TABLE detalle_ventas (
+    id_medicamento INT , 
+    lote VARCHAR(50) ,
+    cantidad INT NOT NULL
+    CONSTRAINT fk_medicamento_detalle
+        FOREIGN KEY (id_medicamento, lote)
+        REFERENCES medicamento(id_medicamento, lote)
+);
+
+
+------------------------------------------------------
+
+Nuevo Ejercicio: Relacionar otras dos tablas
+
+-- tabla: cliente_id
+-- atributo: cliente_id nombre_id
+
+-- tabla: pedidos
+-- atributos: pedido_id, cliente_id
+
+
+
+CREATE TABLE cliente (
+    id INT AUTO_INCREMENT , 
+    nombre VARCHAR(50) NOT NULL ,
+    apellido VARCHAR(50) NOT NULL ,
+
+    CONSTRAINT pk_cliente PRIMARY KEY (id)
+);
+
+CREATE TABLA pedido (
+    pedido_id INT AUTO_INCREMENT ,
+    cliente_id INT NOT NULL ,
+
+    CONSTRAINT pk_pedido PRIMARY KEY (pedido_id),
+    CONSTRAINT fk_pedido_cliente FOREIGN KEY (cliente_id) REFERENCES cliente(id)
+
+    ON UPDATE CASCADE;  -- Actualizo mi lista hasta ahora 
+    ON DELETE CASCADE;  -- Elimino la lista
+);
+
+
+Explicación de algunos terminos...
+ON UPDATE CASCADE --> si cambia el valor de una tabla, cambia el valor en todas sus referencias
+ON DELETE CASCADE; --> si elimino ese registro en una tabla, se eliminan sus referencias  en la
+
+
+--------------------------------------
+
+Nuevo Ejercicio:
+
+-- tabla: producto-- atributos: id, nombre, referencia, precio
+CREATE TABLE producto (
+    id INT PRIMARY KEY AUTO_INCREMENT ,
+    nombre VARCHAR(100) NOT NULL ,
+    referencia CHAR(10) NOT NULL , -- todas la misma longitud
+    precio DECIMAL (5, 2) NOT NULL
+);
+
+
+
+
+-- En INSERTE, inserto los valores que así quiera detro de la tabla que apunte INTO... (A esta tabla producto, entre corchetes, le indico que atributos deseo insertar)
+INSERT INTO producto ( nombre, referencia, precio)
+VALUES ('queso', '1234567890', 10.50);  -- aquí, insertamos nuestra primera actualización de la tabla productos
+
+== UPDATE ==
+UPDATE produto -- actualizo ahora, la tabla producto
+SET precio = 9,99 -- edito el valor del precio de mi producto 'queso'
+WHERE id = 1; -- el producto 'queso' que he insertado, tendrá id = 1
+
+
+-- modificación de inicio de AUTO_INCREMENT 
+CREATE TABLE producto (
+    id INT PRIMARY KEY AUTO_INCREMENT ,
+    nombre VARCHAR(100) NOT NULL ,
+    referencia CHAR(10) NOT NULL , -- todas la misma longitud
+    precio DECIMAL (5, 2) NOT NULL
+) AUTO_INCREMENT = 1000;  -- aquí le digo a mi tabla, que al insertar un nuevo producto, empiece a contar desde 1000 (cerraría la sentencia después del número ";")
+
+-- si lo que quiero es modificar el AUTO_INCREMENT con ALTER TABLE...
+    ALTER TABLE producto AUTO_INCREMENT = 1000;
+
+    == DELETE ==
+    CREATE TABLE producto (
+    id INT PRIMARY KEY AUTO_INCREMENT ,
+    nombre VARCHAR(100) NOT NULL ,
+    referencia CHAR(10) NOT NULL , -- todas la misma longitud
+    precio DECIMAL (5, 2) NOT NULL
+);
+
+INSERT INTO producto (nombre, referencia, precio)
+DELETE FROM producto -- Quiero borrar dentro de la tabla producto. Esto va a eliminar únicamente un registro en concreto (el que hemos creado antes, 'queso')
+WHERE ID = 1;
+
+
+-- Alerta, esto elimina todo
+-- se queda la tabla vacía
+DELETE FROM producto;       -- Aquí, estoy eliminando todos elementos insertados dentro de la tabla producto. La tabla productos se queda vacía
+
+== DROP ==
+-- elimina tablas, base de datos
+DROP TABLE   -- Aquí, si que si, eliminamos todos los elementos de la tabla producto. La tabla productos se elimina de mi base de datos eliminando todos los elementos dentro de esta. Deja de existir la tabla productos.
+
+
+
+--------------------------------------
+EJERCICIOS 
+--------
+Ejercicio 1:
+
+-- tabla: insertamos-- atributo: id, nombre, categoria, precio
+-- insertar 3 registros: dos de categoría bici y uno de categoría ski
+
+-- actualizar el nombre de los productos de la categoría bici
+-- borrar la bici con el precio más Altero
+
+-- creamos nuestra tabla item
+CREATE TABLE item (
+    id INT PRIMARY KEY AUTO_INCREMENT ,
+    nombre VARCHAR(50) NOT NULL ,
+    categoria ENUM('BICI'. 'SKI') NOT NULL ,
+    precio DECIMAL(6, 2) NOT NULL
+);
+
+-- insertamos ahora los elementos
+INSERT INTO item VALUES (NULL, 'bicicleta de montaña', 'BICI', 400.00);
+INSERT INTO item VALUES (NULL, 'biciceta de carretera', 'BICI', 1500.00);
+INSERT INTO item VALUES (NULL, 'ski', 'SKI' , 600.00);
+
+-- Actualizo esos insert
+UPDATE item
+SET nombre = 'bici'
+WHERE categoria = 'BICI'
+
+-- Ahora, borramos el elemento de "Bicicleta con el precio más alto"
+DELETE FROM item
+WHERE categoria = 'BICI'
+   -- AND precio = (SELECT MAX(precio) FROM item WHERE categoria = 'BICI')
+    AND precio < 1500.00;  (aquí estamos eliminando el elemento bicicleta con el precio más alto, de la tabla item)
+
+
+-- Quiero eliminar todo, la tabla item
+DROP TABLE item;
+
+-- TRUNCATE: me deja la tabla vacía pero la elimina y la crea de nuevo. Este TRUNCATE' no se suele utilizar demasiado.
+TRUNCATE TABLE item; --> primero elimina la tabla (DROP) y luego la crea de nuevo (CREATE) la inserta sin elementos 
+
+-- TRUNCATE vs DELETE 
+DELETE FROM item; --> elimina todas las filas pero deja la tabla intacta (y vacía)
+TRUNCATE TABLE item; --> elimina toda la tabla (DROP) y luego la crea de nuevo (CREATE)
