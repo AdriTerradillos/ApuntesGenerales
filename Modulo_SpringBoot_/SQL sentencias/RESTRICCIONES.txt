@@ -1,0 +1,93 @@
+CONDICIONES_Y_RESTRICCIONES: NULL/NOT NULL, DEFAULT, CHECK, etc.
+
+“Veamos la estructura de una columna en CREATE TABLE.
+Primero va el nombre, luego el tipo de dato y, opcionalmente,
+las condiciones o restricciones que queramos imponer.”
+
+
+Condiciones/Restricciones (p.ej. NOT NULL, DEFAULT, CHECK)
+
+2. Clasificación de restricciones y condiciones
+
+Control de nulabilidad	NOT NULL, NULL
+
+Restricciones de valor	CHECK (<expresión>)
+Unicidad y clave primaria	UNIQUE, PRIMARY KEY (inline)
+Integridad referencial	REFERENCES tabla(pk) / FOREIGN KEY (inline)
+Generación automática	AUTO_INCREMENT (MySQL), IDENTITY (SQL Server), GENERATED … AS IDENTITY (PostgreSQL)
+Modificadores de dato	UNSIGNED, ZEROFILL (MySQL), COLLATE <collation>
+Columnas generadas	`GENERATED ALWAYS AS (expresión) VIRTUAL
+Nota: Algunas sintaxis varían por motor (MySQL, PostgreSQL, SQL Server); aquí se muestra el enfoque genérico y las variantes más comunes.
+
+3. Detalle y ejemplos por categoría
+3.1 Control de nulabilidad
+
+“Las columnas, por defecto, permiten NULL. Si queremos impedirlo, usamos NOT NULL. También podemos ser explícitos con NULL, pero no es habitual.”
+
+N0T NULL: impide almacenar registros sin valor en esa columna.
+
+NULL: permite valores nulos (opción por defecto).
+
+3.2 Valor por defecto
+
+“Si no se especifica un valor al INSERT, el motor usará el valor de DEFAULT.”
+
+Se aplica al INSERT.
+
+Puede ser constante, función (p.ej. CURRENT_TIMESTAMP) o expresión simple.
+
+3.3 Restricciones de valor (CHECK)
+
+“Con CHECK limitamos los valores que puede tomar la columna.”
+
+Se evalúa en cada INSERT o UPDATE.
+
+Soporta expresiones lógicas.
+
+3.4 Unicidad y clave primaria
+
+“UNIQUE garantiza que no haya duplicados en esa columna. PRIMARY KEY implica NOT NULL y UNIQUE.”
+
+Inline: columna INT PRIMARY KEY o columna INT UNIQUE.
+
+Se pueden definir múltiples UNIQUE en la misma tabla (pero solo un PRIMARY KEY).
+
+3.5 Integridad referencial
+
+“Con REFERENCES enlazamos una columna con la clave primaria (o única) de otra tabla, creando una clave ajena.”
+
+Asegura consistencia entre tablas.
+
+Puede declararse inline: columna INT REFERENCES otra_tabla(id).
+
+3.6 Generación automática
+
+“Para columnas auto-incrementales, cada motor ofrece una sintaxis: MySQL usa AUTO_INCREMENT, SQL Server IDENTITY, PostgreSQL GENERATED … AS IDENTITY.”
+
+No se puede asignar manualmente (salvo configurar la semilla).
+
+Útil en claves primarias numéricas.
+
+3.7 Modificadores de tipo de dato
+
+“Algunos motores permiten enriquecer el tipo con modificadores como UNSIGNED, ZEROFILL o especificar COLLATE para cadenas.”
+
+UNSIGNED evita valores negativos (MySQL).
+
+ZEROFILL rellena con ceros a la izquierda (MySQL).
+
+COLLATE define reglas de comparación de texto.
+
+3.8 Columnas generadas
+
+“Una columna generada calcula su valor a partir de otras columnas.”
+
+VIRTUAL: no ocupa espacio, se calcula al leer.
+
+STORED: se almacena físicamente.
+
+Declara siempre NOT NULL cuando el dato sea obligatorio.
+
+Usa CHECK para validaciones simples de negocio.
+
+Prefiere REFERENCES inline para claridad en integridad referencial.

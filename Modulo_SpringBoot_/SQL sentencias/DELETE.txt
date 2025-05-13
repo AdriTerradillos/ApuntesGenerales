@@ -1,0 +1,79 @@
+====DELETE====
+
+--delete para registros
+
+CREATE TABLE producto (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(100) NOT NULL,
+	referencia CHAR(10) NOT NULL, -- todas de la misma longitud
+	precio DECIMAL(5, 2) NOT NULL
+);
+
+INSERT INTO producto (nombre, referencia, precio)
+VALUES ('queso', '1234567890', 10.50);
+
+
+-- esto elimina un registro concreto
+DELETE FROM producto
+WHERE id = 1; --registro cuya PK es 1
+
+
+--ALERTA esto elimina todo
+--se queda la tabla vacía
+
+DELETE FROM producto;
+
+====DROP====
+
+--elimina tablas, bases de datos
+DROP TABLE nombre_tabla;
+
+
+--tabla: item
+--atributo: id, nombre, categoria, precio
+--insertar 3 registros: dos de categoría bici y uno de categoría ski
+
+--actualizar el nombre de los productos de la categoría bici
+
+--borrar la bici con el precio más alto
+
+CREATE TABLE item (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL,
+	categoria ENUM('BICI', 'SKI') NOT NULL,
+	precio DECIMAL(6, 2) NOT NULL
+);
+
+--Una vez creada la tabla se añade información
+
+INSERT INTO item VALUES (NULL, 'bicicleta de montaña', 'BICI', 400.00);
+INSERT INTO item VALUES (NULL, 'bicicleta de carretera', 'BICI', 1500.00);
+INSERT INTO item VALUES (NULL, 'ski', 'SKI', 600.00);
+
+--Con la sentencia UPDATE se actualizan los nombres de los productos
+--de la categoría BICI, pero para este ejemplo no es necesario
+/*
+UPDATE item
+SET nombre = 'bici'
+WHERE categoria = 'BICI';
+*/
+
+--Sentencia para eliminar aquellos registros que sean de la categoría BICI
+--que cumplan con el precio máximo de la categoría BICI
+DELETE FROM item
+WHERE categoria = 'BICI' --categoría sea BICI
+	-- AND precio = (SELECT MAX(precio) FROM item WHERE categoria = 'BICI') --precio = MAX()
+	AND precio = 1500.00; --precio = 1500.00;
+	
+--quiero eliminarlo todo, es decir, elimina la tabla entera
+DROP TABLE item;
+
+--TRUNCATE: me deja la tabla vacía pero la elimina y la crea de nuevo
+TRUNCATE TABLE item; --> primero elimina la tabla (DROP) y luego la crea de nuevo (CREATE)
+
+--TRUNCATE vs DELETE
+DELETE FROM item; --> elimina todas las filas pero deja la tabla intacta (y vacía).
+	
+
+
+

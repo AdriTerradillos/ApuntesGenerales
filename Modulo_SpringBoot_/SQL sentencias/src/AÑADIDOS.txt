@@ -1,0 +1,10 @@
+--modificación de inicio de auto_increment
+CREATE TABLE producto (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(100) NOT NULL,
+	referencia CHAR(10) NOT NULL, -- todas de la misma longitud
+	precio DECIMAL(5, 2) NOT NULL
+) AUTO_INCREMENT = 1000;
+
+-- modificación auto_increment con ALTER TABLE
+ALTER TABLE producto AUTO_INCREMENT = 1000;

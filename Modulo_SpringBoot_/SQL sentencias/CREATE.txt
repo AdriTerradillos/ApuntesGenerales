@@ -1,0 +1,402 @@
+Operaciones CRUD
+================
+
+Acciones básicas sobre una base de datos o una estructura de almacenamiento de datos 
+o una estructura de almacenamiento de datos.
+
+CRUD solo se refiere a los datos dentro de las tablas, no a las tablas en sí.
+
+----CREATE----
+--------------
+
+Operaciones para crear nuevos registros en la base de datos.
+
+--Se puede hacer una sentencia por cada registro
+INSERT INTO tabla (columna1, columna2)
+VALUES (value1, value2);
+
+--Se puede hacer en una única sentecia INSERT la inserción de múltiples registros.
+INSERT INTO tabla (columna1, columna2)
+VALUES
+	(value1a, value2a),
+	(value1b, value2b),
+	(value1c, value2c);
+	
+--Se puede insertar valores en algunas columnas, aquellas columnas que no sean mencionadas
+--se rellenan con un NULL.
+INSERT INTO tabla (columna1, columna5, columna7)
+VALUES ('primero', 'quinto', 'septimo');
+
+En este caso la tabla quedaría algo similar a:
+
+| columna1 | columna2 | columna3 | columna4 | columna5 | columna6 | columna7 | columna8 |
+| primero  |   NULL   |   NULL   |   NULL   | quinto   |   NULL   | septimo  |   NULL   |
+
+--Se pueden insertar valores sin necesidad de especificar las columnas.
+--En ese caso se tendría en cuenta el orden en el que se crean las columnas
+--con la tabla y se le asignan valores en ese orden.
+
+CREATE TABLE tabla (
+	col1,
+	col2,
+	col3,
+	...
+);
+
+INSERT INTO tabla
+VALUES (1, 2, 3, ...);  
+
+--crea la tabla si no existe de usuario
+--IF NOT EXISTS va a comprobar si existe o no la tabla antes de crearla
+
+CREATE TABLE IF NOT EXISTS usuario (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	user_name VARCHAR(20) UNIQUE,
+	user_email VARCHAR(250) UNIQUE
+);
+
+--se puede hacer la misa sentencia sin la necesidad de hacer esta primera comprobación
+CREATE TABLE usuario (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	user_name VARCHAR(20) UNIQUE,
+	user_email VARCHAR(250) UNIQUE
+);
+
+
+--tabla: persona
+--atributos: nombre1, nombre2, apellido1, apellido2, dni
+
+CREATE TABLE IF NOT EXISTS persona (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre1 VARCHAR(50) NOT NULL,
+	nombre2 VARCHAR(50)  NULL,
+	apellido1 VARCHAR(50) NOT NULL,
+	apellido2 VARCHAR(50) NULL,
+	dni CHAR(9) NOT NULL UNIQUE,
+	CONSTRAINT check_dni CHECK (dni REGEXP '^[0-9]{8}[A-Z]$'),
+	CONSTRAINT check_nombre1_length CHECK (CHAR_LENGTH(nombre1) >= 2) 
+);
+
+--tabla: alumnos
+--atributos: id, nombre, apellido, fecha_nacimiento, email
+
+-- original: hay errores con comas
+CREATE TABLE IF NOT EXISTS alumno (
+    id int PRIMARY KEY AUTO_INCREMENT, --el tipo, INT, es más correcto escribirlo en mayúsculas
+    nombre VARCHAR(15) NOT NULL,
+    apellido1 VARCHAR(25) NOT NULL,
+    fecha_nacimiento date, NOT NULL, --el tipo, DATE, es más correcto escribirlo en mayúsculas
+    								 --entre tipo y las condiciones NO va coma
+    email VARCHAR(100) NOT NULL, UNIQUE, --entre tipo y las condiciones NO va coma
+    									 --después del último atributo no va coma
+);
+
+-- corregida
+CREATE TABLE IF NOT EXISTS alumno (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(15) NOT NULL,
+    apellido1 VARCHAR(25) NOT NULL,
+    fecha_nacimiento date NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Otras formas de cómo declarar una PRIMARY KEY
+CREATE TABLE IF NOT EXISTS alumno (
+    id INT AUTO_INCREMENT,
+    nombre VARCHAR(15) NOT NULL,
+    apellido1 VARCHAR(25) NOT NULL,
+    fecha_nacimiento date NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    CONSTRAINT pk_alumno PRIMARY KEY(id)
+);
+
+--para usar CONSTRAINT no hay que declarar la primera columna como PRIMARY KEY
+--en su lugar se indica la restricción
+--la diferencia por hacerlo con CONSTRAINT o PRIMARY KEY es que definir la PRIMARY KEY
+--con CONSTRAINT te permite ponerle nombre
+
+CREATE TABLE IF NOT EXISTS alumno (
+    id INT AUTO_INCREMENT,
+    nombre VARCHAR(15) NOT NULL,
+    apellido1 VARCHAR(25) NOT NULL,
+    fecha_nacimiento DATE NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    PRIMARY KEY(id)
+);
+
+-- tabla: producto
+-- atributos: id, cod_barras, precio, nombre, fecha_env, fecha_cad, marca, proveedor, seccion**
+CREATE TABLE IF NOT EXISTS producto (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    cod_barras CHAR(13) NOT NULL,
+    precio DECIMAL(8,2) NOT NULL,
+    fecha_envio DATETIME NOT NULL,
+    fecha_caducidad DATE NOT NULL, 
+    marca VARCHAR(50) NOT NULL,
+    proveedor ENUM('proveedor1', 'proveedos2',...) NOT NULL,
+    marca VARCHAR(50) NOT NULL,
+    proveedor ENUM('proveedor1', 'proveedos2',   ) NOT NULL,   
+    tipo ENUM('Carnicería', 'Perfumería',   ) NOT NULL
+);
+
+
+====FOREIGN KEY====
+-------------------
+
+Se crean dos tablas que tienen una relación a través del cliente_id
+-- tabla: clientes
+-- atributos: cliente_id, nombre, email
+
+-- tabla: pedidos
+-- atributos: pedidos_id, fecha, cliente_id, total
+
+CREATE TABLE IF NOT EXISTS clientes (
+ 	clientes_id INT PRIMARY KEY AUTO_INCREMENT,
+  	nombre VARCHAR(50) NOT NULL,
+  	email VARCHAR(250) UNIQUE NOT NULL
+);
+  
+CREATE TABLE IF NOT EXISTS pedidos (
+  	pedidos_id INT PRIMARY KEY AUTO_INCREMENT,
+  	fecha DATE NOT NULL,
+  	clientes_id INT,
+  	precio DECIMAL(8,2) NOT NULL,
+  	FOREIGN KEY (clientes_id) REFERENCES clientes(clientes_id)  
+);
+  
+CONSTRAINT fk_clientes FOREIGN KEY (clientes_id) REFERENCES clientes(clientes_id)
+);
+  
+--Se puede utilizar ALTER TABLE
+
+CREATE TABLE IF NOT EXISTS clientes ( --primero se crea la entidad
+  	clientes_id INT PRIMARY KEY AUTO_INCREMENT,
+  	nombre VARCHAR(50) NOT NULL,
+  	email VARCHAR(250) UNIQUE NOT NULL
+);
+  
+CREATE TABLE IF NOT EXISTS pedidos ( --creación de la otra entidad
+  	pedidos_id INT PRIMARY KEY AUTO_INCREMENT,
+  	fecha DATE NOT NULL,
+  	clientes_id INT,
+  	precio DECIMAL(8,2) NOT NULL
+);
+
+--ALTER TABLE nos permite establecer las establecer las relaciones posteriormente  
+ALTER TABLE pedidos
+ADD CONSTRAINT fk_clientes
+FOREIGN KEY (cliente_id)
+REFERENCES clientes(cliente_id);
+
+
+====PRIMARY KEY COMPUESTA====
+-----------------------------
+
+--tabla: entradas
+--atributos: matricula, fecha, hora_entrada, hora_salida
+
+CREATE TABLE IF NOT EXISTS entrada (
+	matricula VARCHAR(10) NOT NULL,
+	fecha DATE NOT NULL,
+	hora_entrada TIME NOT NULL,
+	hora_salida TIME NOT NULL
+	PRIMARY KEY(matricula, fecha, hora_entrada) --en el caso de PRIMARY KEY compuesta
+												--se tiene que definir en conjunto utilizando
+												--PRIMARY KEY()
+);
+
+
+	
+CREATE TABLE IF NOT EXISTS entrada (
+	matricula VARCHAR(10) NOT NULL,
+	fecha DATE NOT NULL,
+	hora_entrada TIME NOT NULL,
+	hora_salida TIME NOT NULL
+	CONSTRAINT pk_matricula_fecha_entrada PRIMARY KEY(matricula, fecha, hora_entrada)
+); --también se puede declarar una PRIMARY KEY compuesta utilizando CONSTRAINT
+
+====FOREIGN KEY COMPUESTA====
+-----------------------------
+
+--tabla: venta
+--id_venta, id_producto
+
+--tabla: detalle_venta
+--atributos: id_venta, id_producto, cantidad
+
+--al igual que la PRIMARY KEY compuesta los mismos atributos son los que se deben
+--declarar también en la FOREIGN KEY
+
+CREATE TABLE venta (
+	id_ventas INT,
+	id_producto INT,
+	PRIMARY KEY(id_venta, id_productos)
+);
+
+CREATE TABLE detalle_ventas (
+	id_venta INT,
+	id_producto INT,
+	cantidad INT,
+	CONSTRAINT fk_venta_pruducto 
+		FOREIGN KEY (id_venta, id_producto) 
+		REFENCES venta(id_venta, id_producto)
+);
+
+--ejemplo parecido al anterior pero con medicamento y consumo
+
+--tabla: medicamento
+--atributos: id_medicamento, lote
+
+--tabla: consumo_medicamento
+--atributos: id_medicamento, lote, cantidad
+
+
+CREATE TABLE medicamento (
+	id_medicamento INT,
+	lote VARCHAR(50),
+	PRIMARY KEY(id_medicamento, lote)
+);
+
+CREATE TABLE consumo_medicamento (
+	id_medicamento INT,
+	lote VARCHAR(50),
+	cantidad INT NOT NULL,
+	CONSTRAINT fk_medicamento_detalle
+		FOREIGN KEY (id_medicamento, lote) 
+		REFENCES medicamento(id_medicamento, lote)
+);
+
+======FOREIGN KEY======
+===ON DELETE CASCADE===
+===ON UPDATE CASCADE===
+
+-- tabla: cliente
+-- atributo: cliente_id, nombre, apellido
+
+-- tabla: pedido
+-- atributo: pedido_id, cliente_id
+
+CREATE TABLE IF NOT EXISTS cliente (
+    id INT AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+
+    CONSTRAINT pk_cliente PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS pedido (
+    pedido_id INT AUTO_INCREMENT,
+    cliente_id INT NOT NULL,
+
+    CONSTRAINT pk_pedido PRIMARY KEY (pedido_id),
+    CONSTRAINT fk_pedido_cliente FOREIGN KEY (cliente_id) REFERENCES cliente(id)
+	
+	
+    ON UPDATE CASCADE --si cambia el valor en una tabla cambia ese valor en todas sus referencias
+    ON DELETE CASCADE --si elimino ese registro en una tabla se eliminan sus referencias en la otra tabla
+);
+
+===================
+= INSERT & UPDATE =
+===================
+
+
+--tabla: producto
+--atributos: id, nombre, referencia, precio
+
+--creo una tabla
+CREATE TABLE producto (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(100) NOT NULL,
+	referencia CHAR(10) NOT NULL, -- todas de la misma longitud
+	precio DECIMAL(5,2) NOT NULL
+);
+
+INSERT INTO producto (nombre, referencia, precio)
+VALUES ('queso', '1234567890', 10.50);
+
+UPDATE producto
+SET precio = 9.99
+WHERE id = 1;
+
+-- modificación de inicio de auto_increment
+CREATE TABLE producto (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(100) NOT NULL,
+	referencia CHAR(10) NOT NULL, -- todas de la misma longitud
+	precio DECIMAL(5, 2) NOT NULL
+) AUTO_INCREMENT = 1000;
+
+-- modificación auto_increment con ALTER TABLE
+ALTER TABLE producto AUTO_INCREMENT = 1000;
+
+====DELETE====
+
+--delete para registros
+
+CREATE TABLE producto (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(100) NOT NULL,
+	referencia CHAR(10) NOT NULL, -- todas de la misma longitud
+	precio DECIMAL(5, 2) NOT NULL
+);
+
+INSERT INTO producto (nombre, referencia, precio)
+VALUES ('queso', '1234567890', 10.50);
+
+
+-- esto elimina un registro concreto
+DELETE FROM producto
+WHERE id = 1;
+
+
+--ALERTA esto elimina todo
+--se queda la tabla vacía
+DELETE FROM producto;
+
+====DROP====
+
+--elimina tablas, bases de datos
+DROP TABLE 
+
+
+--tabla: item
+--atributo: id, nombre, categoria, precio
+--insertar 3 registros: dos de categoría bici y uno de categoría ski
+
+--actualizar el nombre de los productos de la categoría bici
+
+--borrar la bici con el precio más alto
+
+CREATE TABLE item (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL,
+	categoria ENUM('BICI', 'SKI') NOT NULL,
+	precio DECIMAL(6, 2) NOT NULL
+);
+
+INSERT INTO item VALUES (NULL, 'bicicleta de montaña', 'BICI', 400.00);
+INSERT INTO item VALUES (NULL, 'bicicleta de carretera', 'BICI', 1500.00);
+INSERT INTO item VALUES (NULL, 'ski', 'SKI', 600.00);
+
+UPDATE item
+SET nombre = 'bici'
+WHERE categoria = 'BICI';
+
+DELETE FROM item
+WHERE categoria = 'BICI'
+	-- AND precio = (SELECT MAX(precio) FROM item WHERE categoria = 'BICI')
+	AND precio = 1500.00;
+	
+--quiero eliminarlo todo
+DROP TABLE item;
+
+--TRUNCATE: me deja la tabla vacía pero la elimina y la crea de nuevo
+TRUNCATE TABLE item; --> primero elimina la tabla (DROP) y luego la crea de nuevo (CREATE)
+
+--TRUNCATE vs DELETE
+DELETE FROM item; --> elimina todas las filas pero deja la tabla intacta (y vacía).
+	
+
+
+
