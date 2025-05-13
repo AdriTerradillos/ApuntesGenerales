@@ -1,0 +1,28 @@
+===================
+= INSERT & UPDATE =
+===================
+
+--tabla: producto
+--atributos: id, nombre, referencia, precio
+
+--creo una tabla
+CREATE TABLE producto (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(100) NOT NULL,
+	referencia CHAR(10) NOT NULL, -- todas de la misma longitud
+	precio DECIMAL(5,2) NOT NULL
+);
+
+--Una vez tenemos la tabla creada hay que INSERT información.
+
+INSERT INTO producto (nombre, referencia, precio)
+VALUES ('queso', '1234567890', 10.50);
+
+--Si queremos cambiar el valor de una de las celdas se 
+--utiliza UPDATE, se indica el valor y se filtra para indicar
+--los registros concretos en función de la condición.
+
+UPDATE producto
+SET precio = 9.99
+WHERE id = 1;
+

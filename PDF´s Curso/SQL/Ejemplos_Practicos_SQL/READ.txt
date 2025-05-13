@@ -1,0 +1,18 @@
+Operaciones CRUD
+================
+
+Acciones básicas sobre una base de datos o una estructura de almacenamiento de datos 
+o una estructura de almacenamiento de datos.
+
+CRUD solo se refiere a los datos dentro de las tablas, no a las tablas en sí.
+
+----READ----
+------------
+
+Se usa para leer o recuperar datos existentes de la base de datos.
+
+Query
+-----
+
+Sentencia SELECT, es una sentencia tan importante dentro de SQL que tiene su propio nombre.
+Permite leer o recuperar datos.
