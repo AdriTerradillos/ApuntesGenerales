@@ -16,3 +16,137 @@ Query
 
 Sentencia SELECT, es una sentencia tan importante dentro de SQL que tiene su propio nombre.
 Permite leer o recuperar datos.
+
+
+1. Todos los campos de la tabla customers.
+--Esto es lo correcto para SQL
+SELECT *
+FROM customers;
+
+--En Java damos la query con una String y si cabe en una línea mejor
+SELECT * FROM customers;
+
+2. Muestra nombre y email de la tabla cliente.
+--En SQL
+SELECT
+	nombre,
+	email
+FROM cliente;
+
+--En Java...
+SELECT nombre, email FROM cliente;
+
+3. id, order_date de la tabla orders.
+--En SQL
+SELECT
+	id,
+	order_date
+FROM orders;
+
+--En Java...
+SELECT id, order_date FROM orders;
+
+4. Muestra los productos (name) cuyo precio (price) sea menor de 20.
+SELECT
+	name AS producto,
+	price AS precio
+FROM producto
+WHERE precio < 20;
+
+5. Listar todos los pedidos (id) que tengan el estado (status) "shipped".
+SELECT id
+FROM pedidos
+WHERE status = "shipped"
+
+
+5.1. Listar todos los pedidos (id) que tengan el estado (status) "shipped"/"resolved".
+SELECT id
+FROM pedidos
+WHERE status IN ("shipped", "resolved");
+
+SELECT id
+FROM pedidos
+WHERE status = "shipped"
+	OR status = "resolved";
+	
+6. Muestra el nombre (name) de los clientes que viven en France (country)
+SELECT name AS nombre
+FROM customers
+WHERE country = "France";
+
+6.1 Muestra el nombre (name) de los clientes que viven en France (country)
+La tabla de paises tiene las siguientes columnas "country_id", "country"
+La tabla de clientes tiene las siguientes columnas "customer_id", "name", "country_id", "city_id"
+
+SELECT 
+	customer.name AS cliente,
+	country.country AS pais
+FROM customer
+JOIN country
+	ON customer.country_id = country.country_id
+WHERE country.country = "France";
+
+--Aparción de los ALIAS
+SELECT
+	cus.name,
+	cou.country
+FROM customer AS cus
+JOIN country AS cou
+	ON cus.country_id = cou.country_id
+WHERE cou.country = "France";
+
+6.2 Muestra el nombre (name) de los clientes que viven en France (country), en la ciudad (city) de París.
+La tabla de paises tiene las siguientes columnas "country_id", "country"
+La tabla de clientes tiene las siguientes columnas "customer_id", "name", "country_id", "city_id"
+La tabla de ciudades tiene las siguientes columnas "city_id", "city", "country_id"
+
+SELECT
+	cus.name,
+	cou.country,
+	ci.city
+FROM customer AS cus
+JOIN country AS cou
+	ON cus.country_id = cou.country_id
+JOIN city AS ci
+	ON ci.country_id = cou.country_id
+WHERE cou.country = "France"
+	AND ci.city = "Paris";
+	
+7. Lista todos los productos (product) de la categoría "Electronics" (tabla product).
+
+SELECT DISTINCT
+	product
+FROM product
+WHERE category = "Electronics";
+
+8. Muestra los pedidos (id), con un total (amount) entre 50 y 150.
+
+SELECT
+	id
+FROM pedidos
+WHERE amount >= 50
+	AND amount <= 150;
+	
+	
+SELECT id
+FROM pedidos
+WHERE amount BETWEEN 50 AND 150; 
+
+9. Listar el email de los clientes (customer_id) cuyo nombre (first_name) 
+empiece por A y su apellido (last_name) acabe por T.
+
+SELECT
+	customer_id AS cliente,
+	email
+FROM clientes
+WHERE first_name LIKE "A%"
+	AND last_name LIKE "%T";
+
+10. Mostrar nombre(name) y precio(price) de los productos ordenados según su precio se mayor a menor.
+
+SELECT
+	name,
+	price
+FROM products
+ORDER BY price DESC; -- si le damos descendente los valores más altos aparecerán primero.
+

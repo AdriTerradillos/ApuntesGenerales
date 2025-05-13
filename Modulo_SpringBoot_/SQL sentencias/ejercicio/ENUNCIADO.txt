@@ -1,0 +1,216 @@
+1.departments
+
+id (INT)
+
+name (VARCHAR)
+
+location (VARCHAR)
+
+2.librarians (one-to-one con departments)
+
+id (INT)
+
+department_id (INT)
+
+name (VARCHAR)
+
+hire_date (DATE)
+
+3.users
+
+id (INT)
+
+name (VARCHAR)
+
+email (VARCHAR UNIQUE)
+
+birthdate (DATE)
+
+is_active (BOOLEAN)
+
+4.authors
+
+id (INT)
+
+first_name (VARCHAR)
+
+last_name (VARCHAR)
+
+country (VARCHAR)
+
+5.books
+
+id (INT)
+
+title (VARCHAR)
+
+isbn (CHAR(13) UNIQUE)
+
+published_year (INT)
+
+price (DECIMAL)
+
+6.book_copies (one-to-many: books → book_copies)
+
+id (INT)
+
+book_id (INT)
+
+acquired_date (DATE)
+
+condition (VARCHAR)
+
+7.loans (many-to-many: users ↔ book_copies, a través de loans)
+
+id (INT)
+
+user_id (INT)
+
+copy_id (INT)
+
+loan_date (DATE)
+
+return_date (DATE NULLABLE)
+
+8.categories
+
+id (INT)
+
+name (VARCHAR)
+
+book_categories (many-to-many: books ↔ categories)
+
+book_id (INT)
+
+category_id (INT)
+
+9.fines (one-to-many: users → fines)
+
+id (INT)
+
+user_id (INT)
+
+amount (DECIMAL)
+
+paid (BOOLEAN)
+
+3. Relaciones y restricciones
+*PRIMARY KEY usando CONSTRAINT pk_<tabla> PRIMARY KEY (columna).
+
+*FOREIGN KEY añadidas con ALTER TABLE … ADD CONSTRAINT fk_<tabla>_<referencia> FOREIGN KEY (…) REFERENCES … (…).
+
+*Relación one-to-one: librarians.department_id → departments.id.
+
+*Relación one-to-many:
+
+	*book_copies.book_id → books.id.
+
+	*loans.user_id → users.id.
+
+	*fines.user_id → users.id.
+
+*Relación many-to-many:
+
+	*loans.copy_id → book_copies.id.
+
+	*book_categories.book_id → books.id; book_categories.category_id → categories.id.
+
+4. Tareas de creación y manipulación (CRUD)
+-CREATE TABLE para cada entidad, definiendo columnas y restricciones básicas.
+
+-CONSTRAINT para las PK en la definición de cada tabla.
+
+-ALTER TABLE para añadir las FK tras haber creado las tablas.
+
+-INSERT:
+
+	*Insertar al menos 3 filas en cada tabla.
+
+-UPDATE:
+
+	*Modificar el condition de una copia de libro.
+
+	*Cambiar el email de un usuario.
+
+-DELETE:
+
+	*Eliminar un libro completo de books (que cascadee o falle si hay dependencias).
+
+5. Consultas SQL
+5.1 Diez consultas BÁSICAS
+Mostrar todos los departamentos.
+
+Listar name y location de departments.
+
+Mostrar todos los usuarios activos.
+
+Listar todos los libros con su title e isbn.
+
+Mostrar first_name, last_name de autores.
+
+Obtener todas las copias de un libro (ej. book_id = 1).
+
+Listar todos los préstamos con fecha de préstamo.
+
+Mostrar todas las categorías.
+
+Listar multas impagas (paid = false).
+
+Mostrar préstamos cuyo return_date sea NULL.
+
+5.2 Diez consultas INTERMEDIAS
+Obtener name de usuario y title del libro para cada préstamo (JOIN).
+
+Listar libros prestados tras 2025-01-01 con nombre de usuario.
+
+Contar cuántas copias tiene cada libro (GROUP BY + JOIN).
+
+Mostrar usuarios con más de 1 multa impaga (HAVING).
+
+Listar títulos de libros y categorías (JOIN many-to-many).
+
+Obtener autor y número de libros publicados (JOIN authors↔books).
+
+Mostrar préstamos y días de retraso (DATEDIFF).
+
+Listar usuarios y suma total de sus multas (JOIN + SUM + GROUP BY).
+
+Mostrar copias en “Good” y “Fair” condition (WHERE IN).
+
+Listar departamentos sin bibliotecario asignado (LEFT JOIN + WHERE IS NULL).
+
+5.3 Diez consultas AVANZADAS
+Listar los 5 libros más prestados (subconsulta o JOIN + GROUP BY + ORDER BY + LIMIT).
+
+Obtener usuarios con préstamos activos y total de días prestado (subconsulta correlada).
+
+Mostrar categoría con precio medio de sus libros (AVG + GROUP BY).
+
+Encontrar el autor con el libro más caro (JOIN + subconsulta).
+
+Listar usuarios cuyo importe total de multas supere la media (HAVING + subconsulta).
+
+Mostrar para cada departamento el nombre del bibliotecario y número de usuarios registrados (JOIN múltiple + GROUP BY).
+
+Obtener libros que nunca se han prestado (LEFT JOIN + WHERE IS NULL).
+
+Listar préstamos donde el usuario ha pagado todas sus multas antes de devolver el libro (subconsulta en WHERE).
+
+Mostrar copias cuya condición ha empeorado respecto a la adquisición (comparación entre fechas, con subconsulta).
+
+Encontrar usuarios que hayan tomado prestados todos los libros de una misma categoría (HAVING + COUNT DISTINCT + subconsulta).
+
+¡Manos a la obra!
+Sigue el orden:
+
+Crea las tablas con sus PK.
+
+Añade las FK con ALTER TABLE.
+
+Inserta datos de prueba.
+
+Realiza los UPDATE y DELETE.
+
+Resuelve las 30 consultas.
+
+Al finalizar, tendréis un dominio sólido de SELECT, FROM, WHERE, JOIN, GROUP BY, HAVING, subconsultas y gestión de integridad referencial. ¡Éxito!
