@@ -1,14 +1,22 @@
---------------------------------------------
+Lo primero será crear la base de datos.
+A continuación tenéis que USE la base de datos.
+
+A partir de aquí ya podemos CREATE las tablas:
+
+CREATE DATABASE libreria;
+USE libreria;
+
 1.departments
-
 id (INT)
-
 name (VARCHAR)
-
 location (VARCHAR)
 
+CREATE TABLE [IF NOT EXISTS] departments (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(300) NOT NULL UNIQUE,
+	location VARCHAR(100) NOT NULL
+);
 
--------------------------------------------
 2.librarians (one-to-one con departments)
 
 id (INT)
@@ -19,36 +27,33 @@ name (VARCHAR)
 
 hire_date (DATE)
 
+CREATE TABLE librarians (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	department_id INT REFERENCES department(id), --esto establece la referencia PERO no hace la referencia COMPLETA como FOREIGN KEY
+	name VARCHAR(350) NOT NULL,
+	hire_date DATE NOT NULL
+	--CONSTRAINT
+);
 
-CREATED TABLE IF NOT EXISTS librarians (
-id INT PRIMARY KEY AUTO_INCREMENT
-department_id INT NULL ,
-name VARCHAR(30) NOT NULL ,
-hire_date DATE NOT NULL 
+--CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES deparments(id)
+
+3.users
+id (INT)
+name (VARCHAR)
+email (VARCHAR UNIQUE)
+birthdate (DATE)
+is_active (BOOLEAN)
+
+CREATE TABLE users (
+	id INT AUTO_INCREMENT,
+	name VARCHAR(100) NOT NULL,
+	email VARCHAR(250) NOT NULL UNIQUE,
+	birthdate DATE NOT NULL,
+	is_active BOOLEAN DEFAULT=TRUE,
+	CONSTRAINT pk_users PRIMARY KEY (id)
 );
 
 
-
-
-
-------------------------------------------
-3.users
-
-id (INT)
-
-name (VARCHAR)
-
-email (VARCHAR UNIQUE)
-
-birthdate (DATE)
-
-is_active (BOOLEAN)
-
-
-
-
-
-----------------------------------------
 4.authors
 
 id (INT)
@@ -59,11 +64,6 @@ last_name (VARCHAR)
 
 country (VARCHAR)
 
-
-
-
-
--------------------------------------------
 5.books
 
 id (INT)
@@ -76,11 +76,6 @@ published_year (INT)
 
 price (DECIMAL)
 
-
-
-
-
------------------------------------------------
 6.book_copies (one-to-many: books → book_copies)
 
 id (INT)
@@ -91,11 +86,6 @@ acquired_date (DATE)
 
 condition (VARCHAR)
 
-
-
-
-
--------------------------------------------------
 7.loans (many-to-many: users ↔ book_copies, a través de loans)
 
 id (INT)
@@ -108,12 +98,6 @@ loan_date (DATE)
 
 return_date (DATE NULLABLE)
 
-
-
-
-
-
--------------------------------------------------
 8.categories
 
 id (INT)
@@ -126,14 +110,6 @@ book_id (INT)
 
 category_id (INT)
 
-
-
-
-
-
-
-
--------------------------------------------------
 9.fines (one-to-many: users → fines)
 
 id (INT)
@@ -144,15 +120,12 @@ amount (DECIMAL)
 
 paid (BOOLEAN)
 
-
-
-
-
----------------------------------------------------
 3. Relaciones y restricciones
 *PRIMARY KEY usando CONSTRAINT pk_<tabla> PRIMARY KEY (columna).
 
 *FOREIGN KEY añadidas con ALTER TABLE … ADD CONSTRAINT fk_<tabla>_<referencia> FOREIGN KEY (…) REFERENCES … (…).
+
+--dejar esto para las relaciones many-to-many
 
 *Relación one-to-one: librarians.department_id → departments.id.
 
@@ -170,14 +143,6 @@ paid (BOOLEAN)
 
 	*book_categories.book_id → books.id; book_categories.category_id → categories.id.
 
-
-
-
-
-
-
-
----------------------------------------------
 4. Tareas de creación y manipulación (CRUD)
 -CREATE TABLE para cada entidad, definiendo columnas y restricciones básicas.
 
@@ -190,15 +155,19 @@ paid (BOOLEAN)
 	*Insertar al menos 3 filas en cada tabla.
 	
 	/*
-	INSERT INTO users -- id, name, email, birthdate, is_activate
+	INSERT INTO users --id, name, email, birthdate, is_activate
 	VALUES
-		(NULL, 'Adrián Terradillos Fernández', 'adrian.terradillos@students.gammatech.school', '2002-03-25', TRUE),
-		(NULL, 'Paco Gutierrez López', 'pgutierrezlopez@gmail.com', '2004-05-2', TRUE),
-		(NULL, 'Jauma Tarragona Pérez', 'jaumatp@gmail.com', '1994-07-6', TRUE);
+		(NULL, 'Alex Bometon Cebollada', 'alex.bometon@gammatech.school, '1992-04-03', TRUE),
+		(NULL, 'Simone Leon Garcia', 'smg@gmail.com', '1960-09-01', TRUE),
+		(NULL, 'Paco Perez Ordoñez', 'paco.po@gmail.com', '1980-09-01', TRUE);
+	*/
 
 -UPDATE:
 
 	*Modificar el condition de una copia de libro.
+	UPDATE books_copies
+	SET condition = 'used'
+	WHERE id = 1;
 
 	*Cambiar el email de un usuario.
 
@@ -206,17 +175,7 @@ paid (BOOLEAN)
 
 	*Eliminar un libro completo de books (que cascadee o falle si hay dependencias).
 
-
-
-
-
-
-
-
-------------------------------------------
 5. Consultas SQL
-------------------------------------------
-
 5.1 Diez consultas BÁSICAS
 Mostrar todos los departamentos.
 
@@ -238,13 +197,6 @@ Listar multas impagas (paid = false).
 
 Mostrar préstamos cuyo return_date sea NULL.
 
-
-
-
-
-
-
---------------------------------------------
 5.2 Diez consultas INTERMEDIAS
 Obtener name de usuario y title del libro para cada préstamo (JOIN).
 
@@ -266,13 +218,6 @@ Mostrar copias en “Good” y “Fair” condition (WHERE IN).
 
 Listar departamentos sin bibliotecario asignado (LEFT JOIN + WHERE IS NULL).
 
-
-
-
-
-
-
-------------------------------------------------
 5.3 Diez consultas AVANZADAS
 Listar los 5 libros más prestados (subconsulta o JOIN + GROUP BY + ORDER BY + LIMIT).
 
@@ -294,29 +239,17 @@ Mostrar copias cuya condición ha empeorado respecto a la adquisición (comparac
 
 Encontrar usuarios que hayan tomado prestados todos los libros de una misma categoría (HAVING + COUNT DISTINCT + subconsulta).
 
-
-
-
-
-
-
-
-
-___________________________________________
 ¡Manos a la obra!
 Sigue el orden:
 
-1º) Crea las tablas con sus PK.
+Crea las tablas con sus PK.
 
-2º) Añade las FK con ALTER TABLE.
+Añade las FK con ALTER TABLE.
 
-3º) Inserta datos de prueba.
+Inserta datos de prueba.
 
-4º) Realiza los UPDATE y DELETE.
+Realiza los UPDATE y DELETE.
 
-5º) Resuelve las 30 consultas.
-
-
-
+Resuelve las 30 consultas.
 
 Al finalizar, tendréis un dominio sólido de SELECT, FROM, WHERE, JOIN, GROUP BY, HAVING, subconsultas y gestión de integridad referencial. ¡Éxito!
